@@ -7,7 +7,7 @@ interface ApiResponse {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const serverSideData: ApiResponsei = await fetch(
+  const serverSideData: ApiResponse = await fetch(
     `${process.env.NEXT_PUBLIC_APIURL}/api/hello`
   ).then((res) => res.json());
   return {
