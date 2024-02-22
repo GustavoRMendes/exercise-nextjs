@@ -1,7 +1,7 @@
 import { NextPage,  GetServerSideProps } from "next";
 import { useEffect, useState, type ReactNode } from "react";
 import { Col, Container, Row } from "reactstrap";
-interface ApiResponse {
+type ApiResponse = {
   name: string;
   timestamp: Date;
 }
@@ -22,15 +22,15 @@ const Dynamic: NextPage = (props: {
   serverSideData?: ApiResponse;
 }) => {
   const [clientSideData, setClientSideData] = useState<ApiResponse>();
-
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   const fetchData = async () => {
     const data = await fetch("api/hello").then((res) => res.json());
     setClientSideData(data);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <>
       <Container tag="main">
