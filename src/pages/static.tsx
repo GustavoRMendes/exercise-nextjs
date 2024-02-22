@@ -8,7 +8,9 @@ type ApiResponse = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const staticData: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/hello`).then((res) => res.json());
+  const staticData = await fetch(
+    `${process.env.NEXT_PUBLIC_APIURL}/api/hello`
+  ).then((res) => res.json());
   return {
     props: {
       staticData,
@@ -17,10 +19,10 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Static: NextPage = (props:
-   {children?: ReactNode
-    staticData?: ApiResponse
-  }) => {
+const Static: NextPage = (props: {
+  children?: ReactNode;
+  staticData?: ApiResponse;
+}) => {
   const [clientSideData, setClientSideData] = useState<ApiResponse>();
   useEffect(() => {
     fetchData();
@@ -38,7 +40,7 @@ const Static: NextPage = (props:
         <Row>
           <Col>
             <h3>Gerado estaticamente durante a build: </h3>
-              {props.staticData?.timestamp.toString()}
+            {props.staticData?.timestamp.toString()}
           </Col>
           <Col>
             <h3>Gerado no cliente:</h3>
