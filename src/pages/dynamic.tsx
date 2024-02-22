@@ -1,4 +1,4 @@
-import { NextPage, type GetServerSideProps } from "next";
+import { NextPage,  GetServerSideProps } from "next";
 import { useEffect, useState, type ReactNode } from "react";
 import { Col, Container, Row } from "reactstrap";
 interface ApiResponse {
@@ -7,7 +7,7 @@ interface ApiResponse {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const serverSideData = await fetch(
+  const serverSideData: ApiResponsei = await fetch(
     `${process.env.NEXT_PUBLIC_APIURL}/api/hello`
   ).then((res) => res.json());
   return {
