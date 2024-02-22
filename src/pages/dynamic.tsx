@@ -51,4 +51,4 @@ const Dynamic: NextPage = (props: {
   );
 };
 
-export default Dynamic;
+export default Dynamic; 
