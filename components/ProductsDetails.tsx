@@ -1,15 +1,16 @@
-import { useState } from "react"
-import type { ProductType } from "./services/products"
-import { Button, Col, Row } from "reactstrap"
-import Image from "next/image"
-import SuccessToast from "./SucessToast"
-
+import { useState } from "react";
+import type { ProductType } from "./services/products";
+import { Button, Col, Row } from "reactstrap";
+import Image from "next/image";
+import SuccessToast from "./SucessToast";
+import { useCart } from "@/hooks/useCart";
 type ProductDetailsProps = {
-  product : ProductType
-}
+  product: ProductType;
+};
 
-const ProductsDetails: React.FC<ProductDetailsProps> = ({ product })=> {
-  const [toastIsOpen,setToastIsOpen] = useState(false)
+const ProductsDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const [toastIsOpen, setToastIsOpen] = useState(false);
+  const { addProduct } = useCart();
   return (
     <>
       <Row>
@@ -30,22 +31,24 @@ const ProductsDetails: React.FC<ProductDetailsProps> = ({ product })=> {
           </p>
           <p className="text-muted">Em Estoque: {product.inStock}</p>
           <Button
-            color="dark"
-            className="my-3 pb-2"
-            onClick={() => {
-              setToastIsOpen(true);
-              setTimeout(() => setToastIsOpen(false), 1000 * 3);
-            }}>
+             color="dark"
+             className="my-3 pb-2"
+             onClick={() => {
+               addProduct(product)
+               setToastIsOpen(true)
+               setTimeout(() => setToastIsOpen(false), 1000 * 3)
+             }}
+          >
             Compre Agora
           </Button>
-          <SuccessToast 
-            toastIsOpen={toastIsOpen} 
+          <SuccessToast
+            toastIsOpen={toastIsOpen}
             setToastIsOpen={setToastIsOpen}
           />
         </Col>
       </Row>
     </>
-  )
-}  
+  );
+};
 
-export default ProductsDetails
+export default ProductsDetails;
